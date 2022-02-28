@@ -3,10 +3,50 @@ const { Component } = React; // 원래는 extends React.Component
 
 class WordRelay extends Component{
     state = {
-        text: 'Hello, webpack',
+        word: '돈큐리',
+        value: '',
+        result: '',
     };
+    onSubmitForm = (e) => {
+        e.preventDefault();
+        if (this.state.word[this.state.word.length - 1] === this.state.value[0]){
+            this.setState((prevState) => { //이전 값을 쓸 경우에는 함수를 쓴다. 
+                return {
+                    word: prevState.value, 
+                    value: '',
+                    result: '딩동댕',
+                };
+            });
+            this.input.focus();
+        }else{
+            this.setState({
+                result: '땡',
+                value: '',
+            })
+            this.input.focus();
+        }
+    };
+
+    onChangeInput = (e) => {
+        this.setState({ value : e.target.value });
+    };
+
+    input;
+    onRefInput = (c) => {
+        this.input = c;
+    };
+
     render(){
-        return <h1>{this.state.text}</h1>;
+        return (
+            <>
+                <div>{this.state.word}</div>
+                <form onSubmit={this.onSubmitForm}>
+                    <input ref={this.onRefInput} value={this.state.value} onChange={this.onChangeInput} />
+                    <button>입력</button>
+                </form>
+                <div>{this.state.result}</div>
+            </>
+        )
     }
 }
 

@@ -1,29 +1,38 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    name: 'word-relay-setting',
-    mode: 'development', //실서비스 : production
-    devtool: 'eval',
+    mode: 'development',
+    devtool: 'eval', // hidden-source-map
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.jsx', '.js'],
     },
-    
-    entry: {
-        app: ['./client'],
-    }, // 입력
 
-    module: {
+    entry:{
+        app: './client',
+    },
+    module:{
         rules: [{
-            test: /\.jsx?/,
+            test: /\.jsx?$/,
             loader: 'babel-loader',
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-            },
+                presets: [
+                    ['@babel/preset-env', {
+                        targets: {
+                            browsers: ['> 1% in KR'], //browserslist
+                        },
+                        debug: true,
+                    }],
+                     '@babel/preset-react'
+                ]
+            }
         }],
     },
-
+    plugins: [
+        new webpack.LoaderOptionsPlugin({ debug : true}),
+    ],
     output: {
-        path: path.join(__dirname, 'dist'), // 현재 폴더에 dist 폴더
-        filename: 'app.js'
-    }, // 출력
+        filename: 'app.js',
+        path: path.join(__dirname, 'dist'),
+    },
 };
