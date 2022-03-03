@@ -3,8 +3,9 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
-import NumberBaseball from './NumberBaseballClass';
+import NumberBaseballClass from './NumberBaseballClass';
+import NumberBaseballHooks from './NumberBaseballHooks';
 
 // const NumberBaseball = require('./NumberBaseballClass')
 
-ReactDom.render(<NumberBaseball />, document.querySelector('#root'));
+ReactDom.render(<NumberBaseballHooks />, document.querySelector('#root'));
