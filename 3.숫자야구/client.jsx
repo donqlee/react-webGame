@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import NumberBaseballClass from './NumberBaseballClass';
 import NumberBaseballHooks from './NumberBaseballHooks';
-
+import Test from './RenderTest';
 // const NumberBaseball = require('./NumberBaseballClass')
 
-ReactDom.render(<NumberBaseballHooks />, document.querySelector('#root'));
+ReactDom.render(<Test />, document.querySelector('#root'));
