@@ -1,7 +1,7 @@
 // const React = require('react');
 // const { Component } = React; // 원래는 extends React.Component
 
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import Try from './Try'
 
 function getNumbers(){ // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
@@ -51,6 +51,7 @@ class NumberBaseballClass extends PureComponent{
                     answer: getNumbers(),
                     tries: []
                 })
+                this.inputRef.current.focus();
             }else{
                 for (let i = 0; i < 4; i++){
                     if(answerArray[i] === answer[i]){
@@ -65,6 +66,7 @@ class NumberBaseballClass extends PureComponent{
                         value: '',
                     }  
                 })
+                this.inputRef.current.focus();
             }
         }
        
@@ -72,10 +74,8 @@ class NumberBaseballClass extends PureComponent{
     onChangeInput = (e) => {
         this.setState({value : e.target.value});
     }
-    input;
-    onRefInput = (c) => {
-        this.input = c;
-    }
+    inputRef = createRef();
+ 
 
     render(){
         const { result, value, tries } = this.state; // 구조분해를 통해 this.state를 지울수 있음
@@ -83,7 +83,7 @@ class NumberBaseballClass extends PureComponent{
             <>
               <h1>{result}</h1>
               <form onSubmit={this.onSubmitForm}>
-                  <input ref={this.onRefInput} maxLength={4} value={value} onChange={this.onChangeInput} />
+                  <input ref={this.inputRef} maxLength={4} value={value} onChange={this.onChangeInput} />
               </form>
               <div>시도 : {tries.length}</div>
               <ul>

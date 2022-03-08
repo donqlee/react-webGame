@@ -8,4 +8,4 @@ import NumberBaseballHooks from './NumberBaseballHooks';
 import Test from './RenderTest';
 // const NumberBaseball = require('./NumberBaseballClass')
 
-ReactDom.render(<NumberBaseballHooks />, document.querySelector('#root'));
+ReactDom.render(<NumberBaseballClass />, document.querySelector('#root'));
