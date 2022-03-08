@@ -1,7 +1,7 @@
 // const React = require('react');
 // const { Component } = React; // 원래는 extends React.Component
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Try from './Try'
 
 function getNumbers(){ // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
@@ -14,7 +14,7 @@ function getNumbers(){ // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는
     return array;
 }
 
-class NumberBaseballClass extends Component{
+class NumberBaseballClass extends PureComponent{
     state = {
         result: '',
         value: '',

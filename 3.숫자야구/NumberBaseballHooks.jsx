@@ -1,5 +1,5 @@
 // const React = require('react');
-import React, { useState, userRef } from 'react';
+import React, { useState, userRef, memo, } from 'react';
 import TryHooks from './TryHooks';
 
 function getNumbers(){
@@ -12,7 +12,7 @@ function getNumbers(){
     return array;   
 }
 
-const NumberBaseballHooks = () => {
+const NumberBaseballHooks = memo(() => {
     const [result, setResult] = useState('');
     const [value, setValue] = useState('');
     const [answer, setAnswer] = useState(getNumbers());
@@ -76,7 +76,7 @@ const NumberBaseballHooks = () => {
             </>
         )
     
-}
+})
 
 
 // module.exports = NumberBaseballHooks;

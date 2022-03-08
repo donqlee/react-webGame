@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-const TryHooks = ({ tryInfo }) => { // 구조분해 해준거임
+const TryHooks = memo(({ tryInfo }) => { // 구조분해 해준거임
 // const Try = (props) => {
 //     return (
 //         <li>
@@ -15,6 +15,6 @@ const TryHooks = ({ tryInfo }) => { // 구조분해 해준거임
             <div>{tryInfo.result}</div>
         </li>
     )
-};
+});
 
 export default TryHooks;
