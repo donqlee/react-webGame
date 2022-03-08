@@ -51,7 +51,13 @@ class ResponseCheckClass extends PureComponent{
         ? null 
         : <div>
             평균 시간 : {result.reduce((a, c) => a + c) / result.length}ms
+            <ul>
+                {result.map((v, i) => {
+                    return <li key={v + i}>{i + 1}번째 시도 {v}ms</li>
+                })}
+            </ul>
         </div>
+        
         )
     };
     render(){
