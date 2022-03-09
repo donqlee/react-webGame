@@ -44,19 +44,25 @@ class ResponseCheckClass extends PureComponent{
             })
         }
     }
+    OnReset = () => {
+        this.setState({
+            result: [],
+        })
+    }
     renderAverage = () => {
         const { result } = this.state;
         return (
         result.length === 0 
         ? null 
-        : <div>
-            평균 시간 : {result.reduce((a, c) => a + c) / result.length}ms
+        : <>
+            <div>평균 시간 : {result.reduce((a, c) => a + c) / result.length}ms</div>
             <ul>
                 {result.map((v, i) => {
                     return <li key={v + i}>{i + 1}번째 시도 {v}ms</li>
                 })}
             </ul>
-        </div>
+            <button onClick={this.OnReset}>리셋</button>
+        </>
         
         )
     };
