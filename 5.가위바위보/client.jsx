@@ -7,4 +7,4 @@ import RSPClass from './RSPClass';
 import RSPHooks from './RSPHooks';
 
 
-ReactDom.render(<RSPClass />, document.querySelector('#root'));
+ReactDom.render(<RSPHooks />, document.querySelector('#root'));
