@@ -15,22 +15,48 @@ function getWinNumbers(){
 class LottoClass extends Component {
     state = {
         winNumbers : getWinNumbers(), // 당첨 숫자들
-        winBalls: [],
+        winBalls:[],
         bonus: null, // 보너스 공
         redo: false,
-
     };
+    timeouts = [];
+    
+
+    componentDidMount(){
+        const { winNumbers } = this.state;
+        for(let i = 0; i < winNumbers.length - 1; i++){
+            this.timeouts[i] = setTimeout(() => {
+                this.setState((prevState) => {
+                    return {
+                     winBalls: [...prevState.winBalls, winNumbers[i]]
+                    }
+                })
+            }, (i + 1) * 1000);
+        }
+        console.log(this.state.winBalls);
+        this.timeouts[6] = setTimeout(() => {
+            this.setState({
+                bonus: winNumbers[6],
+                redo: true,
+            })
+        },7000);
+    }
+    componentWillUnmount(){
+        this.timeouts.forEach((v) => {
+            clearTimeout(v);
+        })
+    }
     render(){
         const { winBalls, bonus, redo } = this.state;
         return(
             <>
               <div>당첨 숫자</div>
               <div id="결과창">
-                    {winBalls.map((v) => <Ball key={v} number={v} />)}  
+                    {winBalls.map((v) => <BallClass key={v} number={v} />)}  
               </div>
               <div>보너스!</div>
               {bonus && <BallClass number={bonus} />}
-              <button onClick={redo ? onClickRedo : () => {}}>한번 더!</button> 
+              {redo && <button onClick={this.onClickRedo}>한번 더!</button>}
             </>
         )
     }
