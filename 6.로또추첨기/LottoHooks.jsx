@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import BallClass from './BallClass';
 
 function getWinNumbers(){
@@ -15,7 +15,10 @@ function getWinNumbers(){
 
 
 const LottoHooks = () => {
-    const [winNumbers, setWinNumbers] = useState(getWinNumbers);
+    //useMemo : 복잡한 함수 결과값을 기억
+    //useRef : 일반 값을 기억
+    const lottoNumbers = useMemo(() => getWinNumbers(), []);
+    const [winNumbers, setWinNumbers] = useState(lottoNumbers);
     const [winBalls, setWinBalls] = useState([]);
     const [bonus, setBonus] = useState(null);
     const [redo, setRedo] = useState(false);
@@ -42,13 +45,15 @@ const LottoHooks = () => {
     }, [timeouts.current]); // 빈 배열이면 componentDidMount와 동일
     // 배열에 요소가 있는 componentDidMount 와 componentDidUpdate 둘 다 수행
 
-    const onClickRedo = () => {
+    const onClickRedo = useCallback( () => {
+        console.log(winNumbers);
         setWinNumbers(getWinNumbers());
         setWinBalls([]);
         setBonus(null);
         setRedo(false);
         timeouts.current = [];
-    }
+    }, [winNumbers]);
+    // useCallback은 함수를 기억하는거
 
     return (
         <>
