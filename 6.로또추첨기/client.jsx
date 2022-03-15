@@ -8,4 +8,4 @@ import LottoHooks from './LottoHooks';
 
 
 
-ReactDom.render(<LottoClass />, document.querySelector('#root'));
+ReactDom.render(<LottoHooks />, document.querySelector('#root'));
