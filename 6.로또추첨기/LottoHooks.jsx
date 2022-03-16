@@ -45,6 +45,16 @@ const LottoHooks = () => {
     }, [timeouts.current]); // 빈 배열이면 componentDidMount와 동일
     // 배열에 요소가 있는 componentDidMount 와 componentDidUpdate 둘 다 수행
 
+    //componentDidUpdate만 실행하고 싶을때 
+    const mounted = useRef(false);
+    useEffect(() => {
+        if(!mounted.current){
+            mounted.current = true;
+        }else{
+            //실행
+        }
+    }, [바뀌는값])
+
     const onClickRedo = useCallback( () => {
         console.log(winNumbers);
         setWinNumbers(getWinNumbers());
@@ -54,6 +64,7 @@ const LottoHooks = () => {
         timeouts.current = [];
     }, [winNumbers]);
     // useCallback은 함수를 기억하는거
+    // 자식 컴포넌트에 props로 함수를 넘길때 useCallback을 꼭 써야함
 
     return (
         <>
